@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>NFL vs Bundesliga</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: #f5f5f5;
+      color: #111;
+    }
+
+    .page {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 60px 8%;
+    }
+
+    .question {
+      font-size: clamp(42px, 7vw, 96px);
+      line-height: 1;
+      font-weight: 800;
+      max-width: 1100px;
+      margin-bottom: 70px;
+    }
+
+    .question span {
+      color:  #0757c8;
+    }
+
+    .comparison {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
+      max-width: 1100px;
+    }
+
+    .league {
+      background: white;
+      border-radius: 20px;
+      padding: 40px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+    }
+
+    .league-name {
+      font-size: 28px;
+      font-weight: 700;
+      margin-bottom: 35px;
+    }
+
+    .number {
+      font-size: clamp(70px, 10vw, 130px);
+      font-weight: 800;
+      line-height: 1;
+    }
+
+    .description {
+      font-size: 22px;
+      color: #666;
+      margin-top: 15px;
+    }
+
+    .conclusion {
+      margin-top: 60px;
+      font-size: clamp(28px, 4vw, 48px);
+      font-weight: 700;
+      max-width: 1000px;
+    }
+
+    .highlight {
+      color: #0757c8;
+    }
+
+    @media (max-width: 700px) {
+      .comparison {
+        grid-template-columns: 1fr;
+      }
+
+      .page {
+        padding: 40px 25px;
+      }
+    }
+
+    /* GAME */
+
+.game-screen {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  text-align: center;
+  background: #f5f5f5;
+}
+
+.game-screen h1 {
+  font-size: clamp(48px, 7vw, 80px);
+  margin: 0 0 10px;
+}
+
+.game-screen p {
+  font-size: 24px;
+  color: #666;
+  margin-bottom: 40px;
+}
+
+.game-buttons {
+  width: 100%;
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.game-button {
+  border: 0;
+  border-radius: 16px;
+  padding: 22px;
+  font-size: 24px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.quick-button {
+  background: #111;
+  color: white;
+  padding: 32px;
+  font-size: 34px;
+}
+
+.pick-button {
+  background: #ddd;
+  color: #111;
+}
+
+.player-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  width: 100%;
+  max-width: 600px;
+}
+
+.player-choice {
+  background: white;
+  border: 2px solid #ddd;
+  border-radius: 12px;
+  padding: 18px;
+  font-size: 22px;
+  cursor: pointer;
+}
+
+.player-choice.selected {
+  background: #111;
+  color: white;
+  border-color: #111;
+}
+
+.start-button {
+  margin-top: 25px;
+  background: #0757c8;
+  color: white;
+}
+
+.game-team {
+  font-size: 24px;
+  line-height: 1.7;
+}
+
+.fade-out {
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.fade-in {
+  opacity: 1;
+  transition: opacity 0.5s ease;
+}
+
+.scoreboard {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  width: 100%;
+  max-width: 600px;
+  margin-top: 30px;
+  background: white;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.score-header {
+  background: #111;
+  color: white;
+  padding: 20px;
+  font-size: 26px;
+  font-weight: bold;
+}
+
+.score {
+  padding: 20px;
+  font-size: 32px;
+  font-weight: bold;
+  border-bottom: 1px solid #ddd;
+}
+
+.intro-screen {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  text-align: center;
+}
+
+.intro-screen h1 {
+  font-size: clamp(48px, 7vw, 80px);
+  line-height: 1.05;
+  max-width: 900px;
+  margin-bottom: 50px;
+}
+
+.intro-button {
+  background: #111;
+  color: white;
+  border: none;
+  border-radius: 16px;
+  padding: 28px 70px;
+  font-size: 30px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.teams {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  width: 100%;
+  max-width: 700px;
+  margin-bottom: 30px;
+}
+
+.team-column {
+  background: white;
+  border-radius: 16px;
+  padding: 25px;
+  font-size: 24px;
+  line-height: 1.8;
+}
+
+.team-column h2 {
+  margin-top: 0;
+  margin-bottom: 15px;
+  font-size: 30px;
+}
+  </style>
+</head>
+
+
+
+
+
+<body>
+
+  <main id="game" class="intro-screen">
+
+    <h1>See why competition makes sports better to watch.</h1>
+
+    <button
+      class="intro-button"
+      onclick="showTeamSelection()">
+      PLAY
+    </button>
+
+  </main>
+
+
+<script>
+
+  const availablePlayers = [
+    "MJ23",
+    "Kobe",
+    "Shaq",
+    "Steph",
+    "A.I.verson",
+    "Dirk"
+  ];
+
+  function showTeamSelection() {
+
+  document.getElementById("game").innerHTML = `
+
+    <h1>P. Zeig vs. Dossmann48</h1>
+
+    <div class="game-buttons">
+
+      <button
+        class="game-button quick-button"
+        onclick="quickPlay()">
+        QUICK PLAY
+      </button>
+      </div>
+
+      <p>Choose team.</p>
+
+<div class="game-buttons">
+      <button
+        class="game-button pick-button"
+        onclick="showPickScreen()">
+        PICK
+      </button>
+
+    </div>
+
+  `;
+
+}
+
+
+  function quickPlay() {
+
+    showTeam([
+      "P. Zeig",
+      "A.I.verson",
+      "Dirk",
+      "MJ23",
+      "Kobe"
+    ]);
+
+  }
+
+
+  function showPickScreen() {
+
+    document.getElementById("game").innerHTML = `
+
+      <h1>Pick Your Players</h1>
+
+      <p>P. Zeig always plays.</p>
+
+      <div class="player-list">
+
+        ${availablePlayers.map(player => `
+          <button
+            class="player-choice"
+            onclick="togglePlayer(this)">
+            ${player}
+          </button>
+        `).join("")}
+
+      </div>
+
+      <button
+        class="game-button start-button"
+        onclick="startPickedTeam()">
+        START GAME
+      </button>
+
+    `;
+
+  }
+
+
+  function togglePlayer(button) {
+
+    const selected =
+      document.querySelectorAll(".player-choice.selected");
+
+    if (button.classList.contains("selected")) {
+
+      button.classList.remove("selected");
+
+    } else if (selected.length < 4) {
+
+      button.classList.add("selected");
+
+    }
+
+  }
+
+
+  function startPickedTeam() {
+
+    const selected =
+      document.querySelectorAll(".player-choice.selected");
+
+    if (selected.length !== 4) {
+
+      alert("Pick exactly 4 players.");
+
+      return;
+
+    }
+
+    const team = ["P. Zeig"];
+
+    selected.forEach(button => {
+      team.push(button.textContent.trim());
+    });
+
+    showTeam(team);
+
+  }
+
+
+  function showTeam(team) {
+
+  document.getElementById("game").innerHTML = `
+
+    <div class="teams">
+
+      <div class="team-column">
+        <h2>PROS</h2>
+
+        ${team.map((player, index) => `
+          <div>${player}</div>
+        `).join("")}
+      </div>
+
+      <div class="team-column">
+        <h2>JOES</h2>
+
+        <div>Dossmann48</div>
+        <div>Ribery</div>
+        <div>Hanks</div>
+        <div>Obando4</div>
+        <div>Ovi8</div>
+      </div>
+
+    </div>
+
+    <button
+      class="game-button start-button"
+      onclick="startGame()">
+      START GAME
+    </button>
+
+  `;
+
+}
+
+
+  function startGame() {
+
+  document.getElementById("game").innerHTML = `
+
+    <h1 class="starting-message">Game Starting...</h1>
+
+  `;
+
+  setTimeout(() => {
+
+    const game = document.getElementById("game");
+
+    game.classList.add("fade-out");
+
+    setTimeout(() => {
+
+      showResults();
+
+      game.classList.remove("fade-out");
+      game.classList.add("fade-in");
+
+    }, 500);
+
+  }, 500);
+
+}
+
+function showResults() {
+
+  document.getElementById("game").innerHTML = `
+
+    <h1>Five Games</h1>
+
+    <div class="scoreboard">
+
+      <div class="score-header">PROS</div>
+      <div class="score-header">JOES</div>
+
+      <div class="score">21</div>
+      <div class="score">2</div>
+
+      <div class="score">21</div>
+      <div class="score">0</div>
+
+      <div class="score">21</div>
+      <div class="score">2</div>
+
+      <div class="score">21</div>
+      <div class="score">1</div>
+
+      <div class="score">21</div>
+      <div class="score">2</div>
+
+    </div>
+
+  `;
+
+}
+
+</script>
+
+
+
+  <main class="page">
+
+    <div class="question">
+      Which league has
+      <span>more competitive variety?</span>
+    </div>
+
+    <div class="comparison">
+
+      <div class="league">
+        <div class="league-name">🏈 NFL</div>
+        <div class="number">11</div>
+        <div class="description">
+          different champions<br>
+          in the last 20 seasons
+        </div>
+      </div>
+
+      <div class="league">
+        <div class="league-name">⚽ Bundesliga</div>
+        <div class="number">4</div>
+        <div class="description">
+          different champions<br>
+          in the last 20 seasons
+        </div>
+      </div>
+
+    </div>
+
+    <div class="conclusion">
+      NFL has a variety of teams winning.
+      <span class="highlight">That's more competitive variety.</span>
+    </div>
+
+  </main>
+
+</body>
+</html>
