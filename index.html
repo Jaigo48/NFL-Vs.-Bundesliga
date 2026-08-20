@@ -283,6 +283,8 @@
       PLAY
     </button>
 
+    <p>&#x2B07;&#xFE0F; &#x2B07;&#xFE0F;  Too Busy  
+        &#x2B07;&#xFE0F; Scroll &#x2B07;&#xFE0F; &#x2B07;&#xFE0F;</p>
   </main>
 
 
@@ -335,7 +337,7 @@
       "A.I.verson",
       "Dirk",
       "MJ23",
-      "Kobe"
+      "M. Vapaa"
     ]);
 
   }
@@ -345,9 +347,9 @@
 
     document.getElementById("game").innerHTML = `
 
-      <h1>Pick Your Players</h1>
+      <h1>Pick Your 3 Players</h1>
 
-      <p>P. Zeig always plays.</p>
+      <p>STARTERS P. Zeig & M. Vapaa.</p>
 
       <div class="player-list">
 
@@ -381,7 +383,7 @@
 
       button.classList.remove("selected");
 
-    } else if (selected.length < 4) {
+    } else if (selected.length < 3) {
 
       button.classList.add("selected");
 
@@ -395,15 +397,15 @@
     const selected =
       document.querySelectorAll(".player-choice.selected");
 
-    if (selected.length !== 4) {
+    if (selected.length !== 3) {
 
-      alert("Pick exactly 4 players.");
+      alert("Pick exactly 3 players.");
 
       return;
 
     }
 
-    const team = ["P. Zeig"];
+    const team = ["P. Zeig", "M. Vapaa"];
 
     selected.forEach(button => {
       team.push(button.textContent.trim());
@@ -482,7 +484,9 @@ function showResults() {
 
   document.getElementById("game").innerHTML = `
 
-    <h1>Five Games</h1>
+    <h1>Predictable Outcomes = Lessens Fan Experience</h1>
+
+    <h3>WINNERS</h3><h3>Captain P. Zeig | CoCaptain M. Vapaa</h3>
 
     <div class="scoreboard">
 
@@ -504,10 +508,11 @@ function showResults() {
       <div class="score">21</div>
       <div class="score">2</div>
 
-    </div>
-
+      </div>
+ 
   `;
 
+  
 }
 
 </script>
